@@ -7,12 +7,12 @@ type Props = {
 
 const DeletePortfolio = ({ onPortfolioDelete, porfolioValue }: Props) => {
   return (
-    <div>
-      <form onSubmit={onPortfolioDelete}>
-        <input readOnly={true} hidden={true} value={porfolioValue} />
-        <button>X</button>
-      </form>
-    </div>
+    <form onSubmit={onPortfolioDelete}>
+      <input readOnly={true} hidden={true} value={porfolioValue} />
+      <button className="text-white bg-red-500 w-full py-3 border-2 border-red-500 rounded-lg hover:text-red-500 hover:bg-white">
+        X
+      </button>
+    </form>
   );
 };
 

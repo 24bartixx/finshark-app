@@ -8,11 +8,21 @@ type Props = {
 
 const Search = ({ search, onSearchSubmit, handleSearchChange }: Props) => {
   return (
-    <>
-      <form onSubmit={onSearchSubmit}>
-        <input value={search} onChange={handleSearchChange} />
-      </form>
-    </>
+    <section className="relative bg-gray-100">
+      <div className="max-w-4xl mx-auto p-6 space-y-6">
+        <form
+          onSubmit={onSearchSubmit}
+          className="flex flex-col md:flex-row w-full py-4 px-10"
+        >
+          <input
+            value={search}
+            onChange={handleSearchChange}
+            placeholder="Serach companies"
+            className="flex-1 placeholder-black border-2 rounded-lg p-3"
+          />
+        </form>
+      </div>
+    </section>
   );
 };
 
