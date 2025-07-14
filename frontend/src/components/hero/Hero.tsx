@@ -1,5 +1,6 @@
 import React from "react";
 import hero from "./hero.png";
+import { Link } from "react-router-dom";
 
 type Props = {};
 
@@ -16,12 +17,12 @@ const Hero = (props: Props) => {
             news.
           </p>
           <div className="mx-auto lg:mx-0">
-            <a
-              href=""
+            <Link
+              to="/search"
               className="text-2xl font-bold text-white bg-lightGreen rounded hover:opacity-70 px-10 py-5 lg:py-4"
             >
               Get Started
-            </a>
+            </Link>
           </div>
         </div>
         <div className="mx-auto mb-24 lg:mb-0 lg:w-1/2">
