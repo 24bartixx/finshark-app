@@ -112,9 +112,9 @@ export type CompanyIncomeStatement = {
   symbol: string;
   reportedCurrency: string;
   cik: string;
-  fillingDate: string;
+  filingDate: string;
   acceptedDate: string;
-  calendarYear: string;
+  fiscalYear: string;
   period: string;
   revenue: number;
   costOfRevenue: number;
@@ -131,21 +131,23 @@ export type CompanyIncomeStatement = {
   interestExpense: number;
   depreciationAndAmortization: number;
   ebitda: number;
-  ebitdaratio: number;
+  ebit: number;
+  nonOperatingIncomeExcludingInterest: number;
   operatingIncome: number;
-  operatingIncomeRatio: number;
   totalOtherIncomeExpensesNet: number;
   incomeBeforeTax: number;
   incomeBeforeTaxRatio: number;
   incomeTaxExpense: number;
+  netIncomeFromContinuingOperations: number;
+  netIncomeFromDiscontinuedOperations: number;
+  otherAdjustmentsToNetIncome: number;
   netIncome: number;
-  netIncomeRatio: number;
+  netIncomeDeductions: number;
+  bottomLineNetIncome: number;
   eps: number;
-  epsdiluted: number;
+  epsDiluted: number;
   weightedAverageShsOut: number;
   weightedAverageShsOutDil: number;
-  link: string;
-  finalLink: string;
 };
 
 export type CompanyBalanceSheet = {
