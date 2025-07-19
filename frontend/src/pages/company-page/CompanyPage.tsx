@@ -27,33 +27,16 @@ const CompanyPage = (props: Props) => {
       <div className="w-full relative flex ct-docs-disable-sidebar-content overflow-x-hidden">
         <Sidebar />
 
-        <CompanyDashboard>
-          <Tile title="Company Name" subTitle="Tesla" />
-          <Tile title="Company Name" subTitle="Tesla" />
-          <Tile title="Company Name" subTitle="Tesla" />
-          <Tile title="Company Name" subTitle="Tesla" />
-          <Tile title="Company Name" subTitle="Tesla" />
-          <Tile title="Company Name" subTitle="Tesla" />
+        <CompanyDashboard ticker={ticker!}>
+          <Tile title="Company Name" subTitle={company?.companyName ?? "-"} />
+          <Tile title="Price" subTitle={company?.price.toString() ?? "-"} />
+          <Tile title="Sector" subTitle={company?.sector ?? "-"} />
+          <Tile title="DCF" subTitle={company?.dcf.toString() ?? "-"} />
+          <p className="text-medium font-medium text-justify text-gray-900 shadow-lg rounded m-4 mr-10 p-6">
+            {company?.description ?? ""}
+          </p>
         </CompanyDashboard>
       </div>
-      ;
-      {/* {company ? (
-        <div>
-          <nav>
-            <button className="w-10 h-10">
-              <i className="fas fa-ellipsis-v"></i>
-            </button>
-            <div className="flex flex-col h-full overflow-y-auto px-4 pt-6">
-              <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4">
-                Home
-              </h6>
-            </div>
-          </nav>
-          <div></div>
-        </div>
-      ) : (
-        <div>Company not found!</div>
-      )} */}
     </>
   );
 };

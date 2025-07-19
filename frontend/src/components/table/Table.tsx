@@ -2,25 +2,28 @@ import React from "react";
 import { testIncomeStatementData } from "./TestData";
 import { validate } from "uuid";
 
-const data = testIncomeStatementData;
+type Props = {
+  config: any;
+  data: any;
+};
 
-type Props = {};
+// const data = testIncomeStatementData;
 
-type Company = (typeof data)[0];
+// type Company = (typeof data)[0];
 
-const configs = [
-  {
-    label: "Year",
-    render: (company: Company) => company.acceptedDate,
-  },
-  {
-    label: "Cost of revenue",
-    render: (company: Company) => company.costOfRevenue,
-  },
-];
+// const configs = [
+//   {
+//     label: "Year",
+//     render: (company: Company) => company.acceptedDate,
+//   },
+//   {
+//     label: "Cost of revenue",
+//     render: (company: Company) => company.costOfRevenue,
+//   },
+// ];
 
-const Table = (props: Props) => {
-  const tableHeaders = configs.map((configVal) => {
+const Table = ({ config, data }: Props) => {
+  const tableHeaders = config.map((configVal: any) => {
     return (
       <th
         key={configVal.label}
@@ -31,10 +34,10 @@ const Table = (props: Props) => {
     );
   });
 
-  const tableRows = data.map((company) => {
+  const tableRows = data.map((company: any) => {
     return (
       <tr key={company.cik}>
-        {configs.map((configVal) => {
+        {config.map((configVal: any) => {
           return (
             <td className="text-sm font-normal text-gray-900 p-4 whitespace-nowrap">
               {configVal.render(company)}

@@ -27,6 +27,20 @@ const Sidebar = (props: Props) => {
               <FaHome />
               <h6 className="ml-3">Income statement</h6>
             </Link>
+            <Link
+              to="balance-sheet"
+              className="flex items-center text-medium font-bold uppercase no-underline text-blueGray-500 md:min-w-full pt-1 pb-3"
+            >
+              <FaHome />
+              <h6 className="ml-3">Balance sheet</h6>
+            </Link>
+            <Link
+              to="cashflow-statement"
+              className="flex items-center text-medium font-bold uppercase no-underline text-blueGray-500 md:min-w-full pt-1 pb-3"
+            >
+              <FaHome />
+              <h6 className="ml-3">Cashflow statement</h6>
+            </Link>
           </div>
         </div>
       </div>
