@@ -3,6 +3,11 @@ import { CompanyIncomeStatement } from "../../types/company";
 import { useOutletContext } from "react-router";
 import { getIncomeStatement } from "../../api/companies";
 import Table from "../table/Table";
+import Spinner from "../spinner/Spinner";
+import {
+  formatLargeMonetaryNumber,
+  formatRatio,
+} from "../../helper/NumberFormatting";
 
 type Props = {};
 
@@ -13,56 +18,62 @@ const configs = [
   },
   {
     label: "Revenue",
-    render: (company: CompanyIncomeStatement) => company.revenue,
+    render: (company: CompanyIncomeStatement) =>
+      formatLargeMonetaryNumber(company.revenue),
   },
   {
     label: "Cost Of Revenue",
-    render: (company: CompanyIncomeStatement) => company.costOfRevenue,
+    render: (company: CompanyIncomeStatement) =>
+      formatLargeMonetaryNumber(company.costOfRevenue),
   },
   {
     label: "Depreciation",
     render: (company: CompanyIncomeStatement) =>
-      company.depreciationAndAmortization,
+      formatLargeMonetaryNumber(company.depreciationAndAmortization),
   },
   {
     label: "Operating Income",
-    render: (company: CompanyIncomeStatement) => company.operatingIncome,
+    render: (company: CompanyIncomeStatement) =>
+      formatLargeMonetaryNumber(company.operatingIncome),
   },
   {
     label: "Income Before Taxes",
-    render: (company: CompanyIncomeStatement) => company.incomeBeforeTax,
+    render: (company: CompanyIncomeStatement) =>
+      formatLargeMonetaryNumber(company.incomeBeforeTax),
   },
   {
     label: "Net Income",
-    render: (company: CompanyIncomeStatement) => company.netIncome,
+    render: (company: CompanyIncomeStatement) =>
+      formatLargeMonetaryNumber(company.netIncome),
   },
   {
     label: "Earnings Per Share",
-    render: (company: CompanyIncomeStatement) => company.eps,
+    render: (company: CompanyIncomeStatement) => formatRatio(company.eps),
   },
   {
     label: "Earnings Per Share (Diluted)",
-    render: (company: CompanyIncomeStatement) => company.epsDiluted,
+    render: (company: CompanyIncomeStatement) =>
+      formatRatio(company.epsDiluted),
   },
   {
     label: "Gross Profit Ratio",
     render: (company: CompanyIncomeStatement) =>
-      company.grossProfit / company.revenue,
+      formatRatio(company.grossProfit / company.revenue),
   },
   {
     label: "Operating Income Ratio",
     render: (company: CompanyIncomeStatement) =>
-      company.operatingIncome / company.revenue,
+      formatRatio(company.operatingIncome / company.revenue),
   },
   {
     label: "Income Before Taxes Ratio",
     render: (company: CompanyIncomeStatement) =>
-      company.incomeBeforeTax / company.revenue,
+      formatRatio(company.incomeBeforeTax / company.revenue),
   },
   {
     label: "Net Income Ratio",
     render: (company: CompanyIncomeStatement) =>
-      company.netIncome / company.revenue,
+      formatRatio(company.netIncome / company.revenue),
   },
 ];
 
@@ -88,7 +99,7 @@ const IncomeStatement = (props: Props) => {
           <Table config={configs} data={IncomeStatements} />
         </>
       ) : (
-        <>Loading...</>
+        <Spinner />
       )}
     </>
   );

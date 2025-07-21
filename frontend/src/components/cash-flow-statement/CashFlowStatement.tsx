@@ -3,6 +3,8 @@ import { useOutletContext } from "react-router";
 import { CompanyCashFlow } from "../../types/company";
 import { getCashflowStatements } from "../../api/companies";
 import Table from "../table/Table";
+import Spinner from "../spinner/Spinner";
+import { formatLargeMonetaryNumber } from "../../helper/NumberFormatting";
 
 type Props = {};
 
@@ -13,33 +15,38 @@ const config = [
   },
   {
     label: "Operating Cashflow",
-    render: (company: CompanyCashFlow) => company.operatingCashFlow,
+    render: (company: CompanyCashFlow) =>
+      formatLargeMonetaryNumber(company.operatingCashFlow),
   },
   {
     label: "Investing Cashflow",
     render: (company: CompanyCashFlow) =>
-      company.netCashProvidedByInvestingActivities,
+      formatLargeMonetaryNumber(company.netCashProvidedByInvestingActivities),
   },
   {
     label: "Financing Cashflow",
     render: (company: CompanyCashFlow) =>
-      company.netCashProvidedByFinancingActivities,
+      formatLargeMonetaryNumber(company.netCashProvidedByFinancingActivities),
   },
   {
     label: "Cash At End of Period",
-    render: (company: CompanyCashFlow) => company.cashAtEndOfPeriod,
+    render: (company: CompanyCashFlow) =>
+      formatLargeMonetaryNumber(company.cashAtEndOfPeriod),
   },
   {
     label: "CapEX",
-    render: (company: CompanyCashFlow) => company.capitalExpenditure,
+    render: (company: CompanyCashFlow) =>
+      formatLargeMonetaryNumber(company.capitalExpenditure),
   },
   {
     label: "Issuance of Stock (Net)",
-    render: (company: CompanyCashFlow) => company.netStockIssuance,
+    render: (company: CompanyCashFlow) =>
+      formatLargeMonetaryNumber(company.netStockIssuance),
   },
   {
     label: "Free Cash Flow",
-    render: (company: CompanyCashFlow) => company.freeCashFlow,
+    render: (company: CompanyCashFlow) =>
+      formatLargeMonetaryNumber(company.freeCashFlow),
   },
 ];
 
@@ -63,7 +70,7 @@ const CashFlowStatement = (props: Props) => {
       {cashflowStatements && cashflowStatements.length > 0 ? (
         <Table config={config} data={cashflowStatements} />
       ) : (
-        <>Loading...</>
+        <Spinner />
       )}
     </>
   );

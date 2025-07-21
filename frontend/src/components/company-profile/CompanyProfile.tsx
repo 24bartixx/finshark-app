@@ -3,66 +3,80 @@ import { CompanyKeyMetrics } from "../../types/company";
 import { useOutletContext } from "react-router-dom";
 import { getKeyMetrics } from "../../api/companies";
 import RatioList from "../ratio-list/RatioList";
+import Spinner from "../spinner/Spinner";
+import {
+  formatLargeMonetaryNumber,
+  formatLargeNonMonetaryNumber,
+  formatRatio,
+} from "../../helper/NumberFormatting";
 
 type Props = {};
 
 const tableConfig = [
   {
     label: "Market Cap",
-    render: (company: CompanyKeyMetrics) => company.marketCap,
+    render: (company: CompanyKeyMetrics) =>
+      formatLargeMonetaryNumber(company.marketCap),
     subTitle: "Total value of all a company's shares of stock",
   },
   {
     label: "Current Ratio",
-    render: (company: CompanyKeyMetrics) => company.currentRatioTTM,
+    render: (company: CompanyKeyMetrics) =>
+      formatRatio(company.currentRatioTTM),
     subTitle:
-      "Measures the companies ability to pay short term debt obligations",
+      "Measures the company's ability to pay short-term debt obligations",
   },
   {
     label: "Return On Equity",
-    render: (company: CompanyKeyMetrics) => company.returnOnEquityTTM,
+    render: (company: CompanyKeyMetrics) =>
+      formatRatio(company.returnOnEquityTTM),
     subTitle:
       "Return on equity is the measure of a company's net income divided by its shareholder's equity",
   },
   {
     label: "Return On Assets",
-    render: (company: CompanyKeyMetrics) => company.returnOnTangibleAssetsTTM,
+    render: (company: CompanyKeyMetrics) =>
+      formatRatio(company.returnOnTangibleAssetsTTM),
     subTitle:
-      "Return on assets is the measure of how effective a company is using its assets",
+      "Return on assets is the measure of how effectively a company is using its assets",
   },
   {
     label: "Free Cash Flow Yield",
-    render: (company: CompanyKeyMetrics) => company.freeCashFlowYieldTTM,
+    render: (company: CompanyKeyMetrics) =>
+      formatRatio(company.freeCashFlowYieldTTM),
     subTitle:
       "Free cash flow divided by market cap — how much cash the business returns",
   },
   {
     label: "Graham Number",
-    render: (company: CompanyKeyMetrics) => company.grahamNumberTTM,
+    render: (company: CompanyKeyMetrics) =>
+      formatLargeMonetaryNumber(company.grahamNumberTTM),
     subTitle:
-      "This is the upperbouind of the price range that a defensive investor should pay for a stock",
+      "This is the upper bound of the price range that a defensive investor should pay for a stock",
   },
   {
     label: "Capex to Revenue",
-    render: (company: CompanyKeyMetrics) => company.capexToRevenueTTM,
+    render: (company: CompanyKeyMetrics) =>
+      formatRatio(company.capexToRevenueTTM),
     subTitle: "Percentage of revenue spent on capital expenditures",
   },
   {
     label: "Research & Development to Revenue",
     render: (company: CompanyKeyMetrics) =>
-      company.researchAndDevelopementToRevenueTTM,
+      formatRatio(company.researchAndDevelopementToRevenueTTM),
     subTitle:
       "Portion of revenue reinvested in innovation and product development",
   },
   {
     label: "Stock-Based Compensation to Revenue",
     render: (company: CompanyKeyMetrics) =>
-      company.stockBasedCompensationToRevenueTTM,
+      formatRatio(company.stockBasedCompensationToRevenueTTM),
     subTitle: "How much of the revenue is paid to employees via stock",
   },
   {
     label: "Cash Conversion Cycle",
-    render: (company: CompanyKeyMetrics) => company.cashConversionCycleTTM,
+    render: (company: CompanyKeyMetrics) =>
+      formatLargeNonMonetaryNumber(company.cashConversionCycleTTM),
     subTitle:
       "Time (in days) to turn investments in inventory into cash from sales",
   },
@@ -86,7 +100,7 @@ const CompanyProfile = (props: Props) => {
       {companyData ? (
         <RatioList data={companyData} config={tableConfig} />
       ) : (
-        <>Loading...</>
+        <Spinner />
       )}
     </>
   );

@@ -6,6 +6,7 @@ import {
   CompanyKeyMetrics,
   CompanyProfile,
   CompanySearch,
+  CompanyTenK,
 } from "../types/company";
 
 interface SerachResponse {
@@ -77,6 +78,17 @@ export const getCashflowStatements = async (query: string) => {
   try {
     const data = await axios.get<CompanyCashFlow[]>(
       `https://financialmodelingprep.com/stable/cash-flow-statement?symbol=${query}&apikey=${process.env.REACT_APP_API_KEY}`
+    );
+    return data;
+  } catch (error: any) {
+    console.log("Error message from API: ", error.message);
+  }
+};
+
+export const getTenK = async (query: string, limit: Number = -1) => {
+  try {
+    const data = await axios.get<CompanyTenK[]>(
+      `https://financialmodelingprep.com/api/v3/sec_filings/${query}?type=10-k&page=[]&symbol?&limit=${limit}&apikey=${process.env.REACT_APP_API_KEY}`
     );
     return data;
   } catch (error: any) {
