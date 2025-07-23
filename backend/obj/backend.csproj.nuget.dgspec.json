@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/mnt/d/dev/Projects/Fullstack/FinShark/backend/backend.csproj": {}
+    "D:\\dev\\Projects\\FullStack\\FinShark\\backend\\backend.csproj": {}
   },
   "projects": {
-    "/mnt/d/dev/Projects/Fullstack/FinShark/backend/backend.csproj": {
+    "D:\\dev\\Projects\\FullStack\\FinShark\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/d/dev/Projects/Fullstack/FinShark/backend/backend.csproj",
+        "projectUniqueName": "D:\\dev\\Projects\\FullStack\\FinShark\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "/mnt/d/dev/Projects/Fullstack/FinShark/backend/backend.csproj",
-        "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/mnt/d/dev/Projects/Fullstack/FinShark/backend/obj/",
+        "projectPath": "D:\\dev\\Projects\\FullStack\\FinShark\\backend\\backend.csproj",
+        "packagesPath": "C:\\Users\\jestg\\.nuget\\packages\\",
+        "outputPath": "D:\\dev\\Projects\\FullStack\\FinShark\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/root/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\jestg\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/root/.dotnet/sdk/9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
