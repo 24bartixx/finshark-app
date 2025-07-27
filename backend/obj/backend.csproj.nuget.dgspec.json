@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\dev\\Projects\\FullStack\\FinShark\\backend\\backend.csproj": {}
+    "D:\\dev\\Projects\\Fullstack\\FinShark\\backend\\backend.csproj": {}
   },
   "projects": {
-    "D:\\dev\\Projects\\FullStack\\FinShark\\backend\\backend.csproj": {
+    "D:\\dev\\Projects\\Fullstack\\FinShark\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\dev\\Projects\\FullStack\\FinShark\\backend\\backend.csproj",
+        "projectUniqueName": "D:\\dev\\Projects\\Fullstack\\FinShark\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "D:\\dev\\Projects\\FullStack\\FinShark\\backend\\backend.csproj",
+        "projectPath": "D:\\dev\\Projects\\Fullstack\\FinShark\\backend\\backend.csproj",
         "packagesPath": "C:\\Users\\jestg\\.nuget\\packages\\",
-        "outputPath": "D:\\dev\\Projects\\FullStack\\FinShark\\backend\\obj\\",
+        "outputPath": "D:\\dev\\Projects\\Fullstack\\FinShark\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jestg\\AppData\\Roaming\\NuGet\\NuGet.Config"

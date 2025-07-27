@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "u4du6kQD4ww=",
+  "dgSpecHash": "W42AhRFhMH8=",
   "success": true,
-  "projectFilePath": "D:\\dev\\Projects\\FullStack\\FinShark\\backend\\backend.csproj",
+  "projectFilePath": "D:\\dev\\Projects\\Fullstack\\FinShark\\backend\\backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jestg\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\jestg\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
