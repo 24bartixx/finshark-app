@@ -22,12 +22,12 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] StockSearchParamsDto stockSearchParamsDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var stocks = await _stockRepo.GetAllAsync();
+            var stocks = await _stockRepo.GetAllAsync(stockSearchParamsDto);
             var stockss = stocks.Select(stock => stock.ToStockDto());
 
             return Ok(stocks);

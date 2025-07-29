@@ -20,9 +20,33 @@ namespace backend.Repositories
         }
 
 
-        public async Task<List<Stock>> GetAllAsync()
+        public async Task<List<Stock>> GetAllAsync(StockSearchParamsDto searchParams)
         {
-            return await _context.Stocks.Include(c => c.Comments).ToListAsync();
+            IQueryable<Stock> stocks = _context.Stocks.Include(c => c.Comments).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchParams.CompanyName))
+            {
+                stocks = stocks.Where(s => s.CompanyName.Contains(searchParams.CompanyName));
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchParams.Symbol))
+            {
+                stocks = stocks.Where(s => s.Symbol.Contains(searchParams.Symbol));
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchParams.SortBy))
+            {
+                if (searchParams.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
+                {
+                    stocks = searchParams.IsDescending ? stocks.OrderByDescending(s => s.Symbol) : stocks.OrderBy(s => s.Symbol);
+                }
+                else if (searchParams.SortBy.Equals("CompanyName", StringComparison.OrdinalIgnoreCase))
+                {
+                    stocks = searchParams.IsDescending ? stocks.OrderByDescending(s => s.CompanyName) : stocks.OrderBy(s => s.CompanyName);
+                }
+            }
+
+            return await stocks.ToListAsync();
         }
 
         public async Task<Stock?> GetByIdAsync(int id)
