@@ -46,7 +46,9 @@ namespace backend.Repositories
                 }
             }
 
-            return await stocks.ToListAsync();
+            int skipNumber = (searchParams.PageNumber - 1) * searchParams.PageSize;
+
+            return await stocks.Skip(skipNumber).Take(searchParams.PageSize).ToListAsync();
         }
 
         public async Task<Stock?> GetByIdAsync(int id)
