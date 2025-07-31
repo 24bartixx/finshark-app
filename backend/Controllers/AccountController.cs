@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using backend.Dtos.Account;
 using backend.Interfaces;
 using backend.Mappers;
 using backend.Model;
-using backend.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -18,11 +14,13 @@ namespace backend.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly ITokenService _tokenService;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public AccountController(UserManager<AppUser> userManager, ITokenService tokenService)
+        public AccountController(UserManager<AppUser> userManager, ITokenService tokenService, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _tokenService = tokenService;
+            _signInManager = signInManager;
         }
 
         [HttpPost("register")]
@@ -58,7 +56,7 @@ namespace backend.Controllers
                 {
                     return StatusCode(500, createdUser.Errors);
                 }
-                    
+
 
             }
             catch (Exception e)
@@ -66,5 +64,29 @@ namespace backend.Controllers
                 return StatusCode(500, e);
             }
         }
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            AppUser user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == loginDto.Username);
+
+            if (user == null) return Unauthorized("Invalid username!");
+
+            Microsoft.AspNetCore.Identity.SignInResult signInResult
+                = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+
+            if (!signInResult.Succeeded) return Unauthorized("Incorrect password");
+
+            string token = _tokenService.CreateToken(user);
+
+            return Ok(
+                user.ToNewUserDto(token)
+            );
+        }
+
     }
 }

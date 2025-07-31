@@ -3,6 +3,7 @@ using backend.Dtos.Stock;
 using backend.Interfaces;
 using backend.Mappers;
 using backend.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery] StockSearchParamsDto stockSearchParamsDto)
         {
             if (!ModelState.IsValid)
