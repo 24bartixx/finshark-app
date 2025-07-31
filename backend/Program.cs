@@ -2,6 +2,7 @@ using backend.Data;
 using backend.Interfaces;
 using backend.Model;
 using backend.Repositories;
+using backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -61,8 +62,13 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// Repositories
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
+// Token Service
+builder.Services.AddScoped<ITokenService, TokenService>();
+
 
 var app = builder.Build();
 
