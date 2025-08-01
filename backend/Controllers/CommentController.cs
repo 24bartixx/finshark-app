@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using backend.Dtos.Comment;
 using backend.Extensions;
 using backend.Interfaces;
 using backend.Mappers;
 using backend.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,12 +30,13 @@ namespace backend.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [Authorize]
+        public async Task<IActionResult> GetAll([FromQuery] CommentSearchParamsDto commentSearchParamsDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var comments = await _commentRepo.GetAllAsync();
+            var comments = await _commentRepo.GetAllAsync(commentSearchParamsDto);
             var commentsDtos = comments.Select(e => e.ToCommentDto());
             return Ok(commentsDtos);
         }

@@ -15,9 +15,21 @@ namespace backend.Repositories
             _context = context;
         }
 
-        public async Task<List<Comment>> GetAllAsync()
+        public async Task<List<Comment>> GetAllAsync(CommentSearchParamsDto commentSearchParamsDto)
         {
-            return await _context.Comments.Include(c => c.AppUser).ToListAsync();
+            IQueryable<Comment> comments = _context.Comments.Include(c => c.AppUser).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(commentSearchParamsDto.Symbol))
+            {
+                comments = comments.Where(c => c.Stock.Symbol.ToLower() == commentSearchParamsDto.Symbol.ToLower());
+            }
+
+            if (commentSearchParamsDto.IsDescending)
+            {
+                comments = comments.OrderByDescending(c => c.CreatedOn);
+            }
+
+            return await comments.ToListAsync();
         }
 
         public async Task<Comment?> GetByIdAsync(int id)
