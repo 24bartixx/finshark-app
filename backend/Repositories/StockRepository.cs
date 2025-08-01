@@ -22,7 +22,7 @@ namespace backend.Repositories
 
         public async Task<List<Stock>> GetAllAsync(StockSearchParamsDto searchParams)
         {
-            IQueryable<Stock> stocks = _context.Stocks.Include(c => c.Comments).AsQueryable();
+            IQueryable<Stock> stocks = _context.Stocks.Include(s => s.Comments).ThenInclude(s => s.AppUser).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(searchParams.CompanyName))
             {

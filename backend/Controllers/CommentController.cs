@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Dtos.Comment;
+using backend.Extensions;
 using backend.Interfaces;
 using backend.Mappers;
 using backend.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -17,12 +19,13 @@ namespace backend.Controllers
     {
         private readonly ICommentRepository _commentRepo;
         private readonly IStockRepository _stockRepo;
+        private readonly UserManager<AppUser> _userManager;
 
-
-        public CommentController(ICommentRepository commentRepo, IStockRepository stockRepo)
+        public CommentController(ICommentRepository commentRepo, IStockRepository stockRepo, UserManager<AppUser> userManager)
         {
             _commentRepo = commentRepo;
             _stockRepo = stockRepo;
+            _userManager = userManager;
         }
 
 
@@ -64,7 +67,12 @@ namespace backend.Controllers
                 return BadRequest("The stock does not exist.");
             }
 
+            string username = User.GetUsername();
+            AppUser appUser = await _userManager.FindByNameAsync(username);
+
             Comment newComment = createCommentDto.ToCommentFromCreate(stockId);
+            newComment.AppUserId = appUser.Id;
+            
             await _commentRepo.CreateAsync(newComment);
 
             return CreatedAtAction(nameof(GetById), new { id = newComment.Id }, newComment.ToCommentDto());

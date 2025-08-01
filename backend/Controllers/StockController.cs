@@ -29,10 +29,10 @@ namespace backend.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var stocks = await _stockRepo.GetAllAsync(stockSearchParamsDto);
-            var stockss = stocks.Select(stock => stock.ToStockDto());
+            List<Stock> stocks = await _stockRepo.GetAllAsync(stockSearchParamsDto);
+            List<StockDto> stockDtos = stocks.Select(stock => stock.ToStockDto()).ToList();
 
-            return Ok(stocks);
+            return Ok(stockDtos);
         }
 
         [HttpGet("{id:int}")]
