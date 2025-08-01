@@ -99,6 +99,10 @@ builder.Services.AddScoped<IPortfolioRepository, PortofolioRepository>();
 // Token Service
 builder.Services.AddScoped<ITokenService, TokenService>();
 
+// FMP Service
+builder.Services.AddScoped<IFinancialModelingService, FinancialModelingService>();
+builder.Services.AddHttpClient<IFinancialModelingService, FinancialModelingService>();
+
 
 var app = builder.Build();
 

@@ -32,5 +32,18 @@ namespace backend.Mappers
                 MarketCap = createStockDto.MarketCap
             };
         }
+
+        public static Stock ToStockFromFMP(this StockFMP stockFMP)
+        {
+            return new Stock
+            {
+                Symbol = stockFMP.symbol,
+                CompanyName = stockFMP.companyName,
+                Purchase = (decimal) stockFMP.price,
+                LastDiv = (decimal) stockFMP.lastDiv,
+                Industry = stockFMP.industry,
+                MarketCap = stockFMP.mktCap
+            };
+        }
     }
 }
