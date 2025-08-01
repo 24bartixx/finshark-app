@@ -24,5 +24,24 @@ namespace backend.Repositories
                 .Select(portfolio => portfolio.Stock)
                 .ToListAsync();
         }
+
+        public async Task<Portfolio> CreateAsync(Portfolio portfolio)
+        {
+            await _context.Portfolios.AddAsync(portfolio);
+            await _context.SaveChangesAsync();
+            return portfolio;
+        }
+
+        public async Task<Portfolio> DeleteAsync(AppUser appUser, string symbol)
+        {
+            Portfolio portfolio = await _context.Portfolios.FirstOrDefaultAsync(p => p.AppUserId == appUser.Id && p.Stock.Symbol == symbol);
+
+            if (portfolio == null) return portfolio;
+
+            _context.Portfolios.Remove(portfolio);
+            await _context.SaveChangesAsync();
+            return portfolio;
+
+        }
     }
 }
