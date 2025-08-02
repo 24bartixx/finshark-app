@@ -11,7 +11,7 @@ type UserContextType = {
   token: string | null;
   registerUser: (email: string, username: string, password: string) => void;
   loginUser: (username: string, password: string) => void;
-  isLoggedIn: () => void;
+  isLoggedIn: () => boolean;
   logout: () => void;
 };
 
