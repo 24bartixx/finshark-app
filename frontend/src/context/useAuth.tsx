@@ -4,6 +4,7 @@ import { UserProfile } from "../types/user";
 import axios from "axios";
 import { loginAPI, registerAPI } from "../services/AuthServices";
 import { handleError } from "../helper/ErrorHandler";
+import React from "react";
 
 type UserContextType = {
   user: UserProfile | null;
@@ -103,3 +104,5 @@ export const UserProvider = ({ children }: Props) => {
     </UserContext.Provider>
   );
 };
+
+export const useAuth = () => React.useContext(UserContext);
